@@ -1,14 +1,11 @@
-import { Grid, IconButton, makeStyles, styled, TextField} from '@mui/material'
-import React from 'react'
-import TwitterIcon from '@mui/icons-material/Twitter';
-import SearchIcon from '@mui/icons-material/Search';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MessageIcon from '@mui/icons-material/LocalPostOffice';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import ListIcon from '@mui/icons-material/ListAlt';
-import UserIcon from '@mui/icons-material/Person';
-import classes from './Home.module.scss'
-
+import { Button, Grid, IconButton, LinearProgress, makeStyles, Paper, styled, TextField, Typography} from '@mui/material'
+import React, { useEffect } from 'react'
+import TwitForm from '../../../components/TwitForm';
+import PostForm from '../../../components/PostForm';
+import SideBar from '../../../components/SideBar';
+import { fetchTweets} from '../../../redux/slice/Tweets';
+import { RootState, useAppDispatch } from '../../../redux/store';
+import { useSelector } from 'react-redux';
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
     color: 'green',
@@ -31,55 +28,33 @@ const CssTextField = styled(TextField)({
 
 const Home:React.FC = () =>{
 
+const dispatch = useAppDispatch()
 
+useEffect(()=>{
+    dispatch(fetchTweets())
+  },[dispatch]);
+
+const load = useSelector((state: RootState) => state.tweets.load);
+const twee = useSelector((state:RootState)=> state.tweets.tweet)
 
   return (
     <Grid container direction="row" justifyContent="space-between" alignItems="flex-start">
-      <Grid item xs={2}>
-        <ul className={classes.homeul}>
-          <li>
-            <IconButton color="primary" aria-label="add an alarm">
-              <TwitterIcon color="primary" />
-            </IconButton>
-          </li>
-          <li>
-            <IconButton color="primary" aria-label="add an alarm">
-              <SearchIcon color="primary" />
-            </IconButton>
-          </li>
-          <li>
-            <IconButton color="primary" aria-label="add an alarm">
-              <NotificationsIcon color="primary" />
-            </IconButton>
-          </li>
-          <li>
-            <IconButton color="primary" aria-label="add an alarm">
-              <MessageIcon color="primary" />
-            </IconButton>
-          </li>
-          <li>
-            <IconButton color="primary" aria-label="add an alarm">
-              <BookmarkIcon color="primary" />
-            </IconButton>
-          </li>
-          <li>
-            <IconButton color="primary" aria-label="add an alarm">
-              <ListIcon color="primary" />
-            </IconButton>
-          </li>
-          <li>
-            <IconButton color="primary" aria-label="add an alarm">
-              <UserIcon color="primary" />
-            </IconButton>
-          </li>
-          <li></li>
-        </ul>
+      <Grid item xs={2} style={{ position: 'sticky', top: '0' }}>
+        <SideBar />
       </Grid>
       <Grid item xs={6}>
-        hgfhfh
+        <Paper variant="outlined">
+          <Typography variant="h1">Главная</Typography>
+        </Paper>
+        <PostForm />
+        {load ? (
+          twee.map((twet: any, i: number) => <TwitForm key={i} text={twet.text} user={twet.user} />)
+        ) : (
+          <LinearProgress />
+        )}
       </Grid>
-      <Grid item xs={4}>
-        <CssTextField id="filled-basic" label="Filled"  />
+      <Grid item xs={4} style={{ position: 'sticky', top: '0' }}>
+        <CssTextField id="filled-basic" label="Filled" />
       </Grid>
     </Grid>
   );
