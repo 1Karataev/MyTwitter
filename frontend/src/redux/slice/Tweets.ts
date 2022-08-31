@@ -15,8 +15,8 @@ export interface Tweet {
   user: User
 }
 type ArrayTweet = {
-  tweet: [Tweet | string],
-  load:boolean
+  tweet: [Tweet|null],
+  load:boolean | null
 }
 
 export const fetchTweets = createAsyncThunk<[Tweet]>(
@@ -30,8 +30,8 @@ export const fetchTweets = createAsyncThunk<[Tweet]>(
 )
 
 const initialState: ArrayTweet = {
-  tweet: [''],
-  load: false
+  tweet: [null],
+  load: null
 }
 
 const tweetSlice = createSlice({
@@ -40,6 +40,10 @@ const tweetSlice = createSlice({
   reducers:{
     setLoad(state, action:PayloadAction<boolean>){
       state.load = action.payload
+    },
+    setTweets(state, action:PayloadAction<[Tweet | null]>){
+      state.tweet = action.payload
+      state.load = true
     }
   },
   extraReducers: (builder) => {
@@ -50,7 +54,7 @@ const tweetSlice = createSlice({
   },
 })
 
-export const {setLoad } = tweetSlice.actions
+export const {setLoad, setTweets } = tweetSlice.actions
 export default tweetSlice.reducer
 
 

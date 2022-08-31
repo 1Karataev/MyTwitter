@@ -1,10 +1,14 @@
 import { Avatar, Grid, Paper, IconButton, Button } from '@mui/material';
-import React from 'react'
+import React, { useState } from 'react'
 import SmileIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import PikchlIcon from '@mui/icons-material/CropOriginal';
-
+import { TextareaAutosize } from '@mui/base';
 
 const PostForm:React.FC = () =>  {
+  const [tweet, setTweet] = useState<string>('')
+  const hundlerChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTweet(e.target.value)
+  }
   return (
     <>
       <Paper variant="outlined">
@@ -13,7 +17,7 @@ const PostForm:React.FC = () =>  {
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </Grid>
           <Grid item xs={11}>
-            <textarea></textarea>
+            <TextareaAutosize style={{width:'400px', height:'200px'}} value={tweet} onChange={hundlerChange}></TextareaAutosize>
             <div>
               <IconButton color="primary" aria-label="add an alarm">
                 <PikchlIcon color="primary" />

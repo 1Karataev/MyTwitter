@@ -3,9 +3,12 @@ import React, { useEffect } from 'react'
 import TwitForm from '../../../components/TwitForm';
 import PostForm from '../../../components/PostForm';
 import SideBar from '../../../components/SideBar';
-import { fetchTweets} from '../../../redux/slice/Tweets';
+import { fetchTweets, setLoad, setTweets, Tweet, User} from '../../../redux/slice/Tweets';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { useSelector } from 'react-redux';
+import { useLazyGetPostQuery } from '../../../redux/RTK/Servis';
+import { Route, Routes } from 'react-router-dom';
+
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
     color: 'green',
@@ -27,12 +30,19 @@ const CssTextField = styled(TextField)({
 });
 
 const Home:React.FC = () =>{
+const [fetchPost,{ data, isLoading, error}] = useLazyGetPostQuery()
 
 const dispatch = useAppDispatch()
 
 useEffect(()=>{
-    dispatch(fetchTweets())
-  },[dispatch]);
+  fetchPost('');
+ dispatch(fetchTweets())
+  
+  
+  
+  dispatch(setLoad(false))
+  },[]);
+
 
 const load = useSelector((state: RootState) => state.tweets.load);
 const twee = useSelector((state:RootState)=> state.tweets.tweet)
@@ -47,11 +57,19 @@ const twee = useSelector((state:RootState)=> state.tweets.tweet)
           <Typography variant="h1">Главная</Typography>
         </Paper>
         <PostForm />
-        {load ? (
-          twee.map((twet: any, i: number) => <TwitForm key={i} text={twet.text} user={twet.user} />)
-        ) : (
-          <LinearProgress />
-        )}
+        <Routes>
+          <Route
+            path="/home"
+            element={
+              !isLoading ? (
+                data?.map((twet: Tweet, i: number) => (
+                  <TwitForm key={i} text={twet.text} user={twet.user} />
+                ))
+              ) : (
+                <LinearProgress />
+              )
+            }></Route>
+        </Routes>
       </Grid>
       <Grid item xs={4} style={{ position: 'sticky', top: '0' }}>
         <CssTextField id="filled-basic" label="Filled" />

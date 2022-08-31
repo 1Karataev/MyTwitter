@@ -5,6 +5,8 @@ import RepeatIcon from '@mui/icons-material/RepeatOutlined';
 import LikeIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ReplyIcon from '@mui/icons-material/ReplyOutlined';
 import { User } from '../redux/slice/Tweets';
+import { Navigate } from 'react-router-dom';
+
 
  type Twit = {
   text:string,
@@ -14,7 +16,7 @@ import { User } from '../redux/slice/Tweets';
 const TwitForm:React.FC<Twit> = ({text, user})=> {
   return (
     <>
-      <Paper variant="outlined">
+      <Paper variant="outlined" onClick={()=>console.log(user.username)}>
         <Avatar alt="Remy Sharp" src={user.avatarURL} />
         <Typography>
           <b style={{ fontSize: 'small' }}>{user.fullname}</b> <span>{`@${user.username}`}</span>
