@@ -1,7 +1,9 @@
 import express from 'express'
 import { validationResult } from 'express-validator'
-import { userModel } from '../models/UserModels'
+import { userModel, UserModelDocument } from '../models/UserModels'
 import { generateMD5 } from '../utils/generateHash'
+import jwt from 'jsonwebtoken'
+
 class UserController {
   async index(req: express.Request, res: express.Response):Promise<void> {
     try{
@@ -24,7 +26,7 @@ class UserController {
     try{
         const errors = validationResult(req);
     if (!errors.isEmpty()) {
-       res.status(400).json({status:'error', message: errors.array ()});
+       res.status(400).json({status:'error', message: errors.array()});
        return
        
     }
@@ -40,6 +42,43 @@ class UserController {
     res.json({
       status:'success',
       data:user
+    })
+    
+    } catch(error){
+        res.json({
+        status:'error',
+        message:JSON.stringify(error)
+    })
+      }
+  }
+
+  async afterLogin(req: express.Request, res: express.Response):Promise<void> {
+    try{
+    const user = (req.user as UserModelDocument).toJSON() || null
+
+    res.json({
+      status:'success',
+      data: {
+        ...user,
+        token: jwt.sign({data: req.user}, 'TOP_SECRET', {expiresIn: '30d'})
+      }
+    })
+    
+    } catch(error){
+        res.json({
+        status:'error',
+        message:JSON.stringify(error)
+    })
+      }
+  }
+
+   async getUserInfo(req: express.Request, res: express.Response):Promise<void> {
+    try{
+    const user = (req.user as UserModelDocument).toJSON() || null
+
+    res.json({
+      status:'success',
+      data: user
     })
     
     } catch(error){
