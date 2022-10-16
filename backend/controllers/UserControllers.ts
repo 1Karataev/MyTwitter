@@ -4,6 +4,8 @@ import { userModel, UserModelDocument } from '../models/UserModels'
 import { generateMD5 } from '../utils/generateHash'
 import jwt from 'jsonwebtoken'
 
+//Сделать show контроллер
+
 class UserController {
   async index(req: express.Request, res: express.Response):Promise<void> {
     try{

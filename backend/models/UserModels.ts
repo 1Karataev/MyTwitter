@@ -2,7 +2,7 @@ import {Document, model, Schema} from 'mongoose'
 
 
 export interface UserModel  {
-  _id?: Number,
+  _id?: String,
   email: String,
   fullname:String
   username:String,
