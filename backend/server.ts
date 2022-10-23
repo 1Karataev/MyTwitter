@@ -29,6 +29,7 @@ app.get('/users/me',passport.authenticate('jwt'), UserCrtl.getUserInfo)
 app.get('/tweets', TweetCrtl.index)
 app.get('/tweets/:id', TweetCrtl.show)
 app.post('/tweets', passport.authenticate('jwt'), createTweetValidations, TweetCrtl.create)
+app.patch('/tweets/:id', passport.authenticate('jwt'), createTweetValidations, TweetCrtl.update)
 app.delete('/tweets/:id', passport.authenticate('jwt'), TweetCrtl.delete)
 
 app.post('/auth/register',registerValidations, UserCrtl.create)
@@ -38,6 +39,5 @@ app.listen(9999,  ()=>{
  
   console.log('server runned')
 })
-
 
 

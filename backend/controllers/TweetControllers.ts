@@ -116,6 +116,36 @@ class TweetController {
       }
   }
 
+  async update(req: express.Request, res: express.Response):Promise<void> {
+    const user = req.user as UserModel;
+    const text = req.body.text
+    try{
+      const tweetId = req.params.id
+      if(!isValidObjectId(tweetId)) {
+      
+        res.status(400).send
+        return
+      }
+
+      const tweet = await tweetModel.findById(tweetId)
+
+      if(tweet && tweet.user === user._id?.toString()) {
+        tweet.text = text
+        tweet.save()
+        res.send()
+      } else {
+        res.status(404).send()
+      } 
+
+    } catch(error){
+        res.status(500)
+        .json({
+        status:'error',
+        message:JSON.stringify(error)
+    })
+      }
+  }
+
 
 }
 
