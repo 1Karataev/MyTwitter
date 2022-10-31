@@ -10,6 +10,7 @@ import { TweetCrtl } from './controllers/TweetControllers'
 
 
 const app = express()
+const cors = require('cors')
 
 app.use(express.json())
 
@@ -18,6 +19,11 @@ app.use(session({
   saveUninitialized: true,
   secret: 'secret' 
 }));
+
+app.use(cors({
+  origin: true,
+  credentials: true
+}))
 
 app.use(passport.initialize())
 

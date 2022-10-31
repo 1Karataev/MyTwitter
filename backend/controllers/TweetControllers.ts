@@ -1,14 +1,14 @@
 import express from 'express'
 import { validationResult } from 'express-validator'
 import { TweetModel, tweetModel, TweetModelDocument } from '../models/TweetModels'
-import { UserModel } from '../models/UserModels'
+import { userModel, UserModel } from '../models/UserModels'
 import { isValidObjectId } from '../utils/isvalidObjectId'
 
 
 class TweetController {
   async index(req: express.Request, res: express.Response):Promise<void> {
     try{
-      const tweets = await tweetModel.find({}).exec()
+      const tweets = await tweetModel.find({}).populate('user')
 
       res.json({
         status:'success',
@@ -32,8 +32,8 @@ class TweetController {
         return
       }
 
-      const tweets = await tweetModel.findById(tweetsId).exec()
-
+      const tweets = await tweetModel.findById(tweetsId).populate('user')
+      
       if(!tweets) {
         res.status(404).send()
         return
@@ -41,7 +41,7 @@ class TweetController {
 
       res.json({
         status:'success',
-        data:tweets
+        data: tweets,
       })
 
     } catch(error){
@@ -69,15 +69,13 @@ class TweetController {
       }
       
       
-    const tweet = await tweetModel.create(data)
-
+    const tweet =  await tweetModel.create(data)
+    
     res.json({
       status:'success',
-      data:tweet
+      data: tweet
     })
     }
-
-
      
     
   } catch(error){

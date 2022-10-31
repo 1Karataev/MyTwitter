@@ -1,10 +1,10 @@
-import { UserModel, userModel } from "../models/UserModels";
+import { UserModel, userModel} from "../models/UserModels";
 import passport from 'passport';
 import {Strategy} from 'passport-local';
 import {Strategy as JWTstrategy, ExtractJwt} from 'passport-jwt';
 
 
-passport.use(new Strategy(async(username: any, password: any, done: any): Promise<void> => {
+passport.use(new Strategy(async(username: string, password: string, done: any): Promise<void> => {
   try {
     const user = await userModel.findOne({$or: [{email: username}, {username}]}).exec() 
     if(!user){

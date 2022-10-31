@@ -18,7 +18,7 @@ const TweetSchema = new Schema<TweetModel>({
 
   user:{
     required:true,
-    type: String
+    type: Schema.Types.ObjectId, ref: 'User'
   },
 
 })
