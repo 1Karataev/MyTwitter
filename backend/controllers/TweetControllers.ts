@@ -71,9 +71,11 @@ class TweetController {
       
     const tweet =  await tweetModel.create(data)
     
+    const tweetForRes =   await tweetModel.findById(tweet.id).populate('user')
+    
     res.json({
       status:'success',
-      data: tweet
+      data: tweetForRes
     })
     }
      
