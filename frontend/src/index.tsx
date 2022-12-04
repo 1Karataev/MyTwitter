@@ -10,6 +10,8 @@ import { store } from './redux/store';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+
 root.render(
   
     <BrowserRouter>

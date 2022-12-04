@@ -1,13 +1,24 @@
-import { Button, Grid, IconButton, LinearProgress, makeStyles, Paper, styled, TextField, Typography} from '@mui/material'
-import React, { useEffect } from 'react'
+import {
+  Button,
+  Grid,
+  IconButton,
+  LinearProgress,
+  makeStyles,
+  Paper,
+  styled,
+  TextField,
+  Typography,
+} from '@mui/material';
+import React, { useEffect } from 'react';
 import TwitForm from '../../../components/TwitForm';
 import PostForm from '../../../components/PostForm';
 import SideBar from '../../../components/SideBar';
-import { fetchTweets, setLoad, setTweets, Tweet, User} from '../../../redux/slice/Tweets';
+import { fetchTweets, setLoad, setTweets, Tweet, User } from '../../../redux/slice/Tweets';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { useSelector } from 'react-redux';
-import { useLazyGetPostQuery } from '../../../redux/RTK/Servis';
-import { Route, Routes } from 'react-router-dom';
+import { useLazyGetPostsQuery } from '../../../redux/RTK/Servis';
+import { Link, Route, Routes } from 'react-router-dom';
+import TweetView from './TweetView';
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -29,23 +40,20 @@ const CssTextField = styled(TextField)({
   },
 });
 
-const Home:React.FC = () =>{
-const [fetchPost,{ data, isLoading, error}] = useLazyGetPostQuery()
+const Home: React.FC = () => {
+  const [fetchPost, { data, isLoading, error }] = useLazyGetPostsQuery();
 
-const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-useEffect(()=>{
-  fetchPost('');
- dispatch(fetchTweets())
-  
-  
-  
-  dispatch(setLoad(false))
-  },[]);
+  useEffect(() => {
+    fetchPost('');
+    // dispatch(fetchTweets())
 
+    dispatch(setLoad(false));
+  }, []);
 
-const load = useSelector((state: RootState) => state.tweets.load);
-const twee = useSelector((state:RootState)=> state.tweets.tweet)
+  const load = useSelector((state: RootState) => state.tweets.load);
+  const twee = useSelector((state: RootState) => state.tweets.tweet);
 
   return (
     <Grid container direction="row" justifyContent="space-between" alignItems="flex-start">
@@ -53,22 +61,28 @@ const twee = useSelector((state:RootState)=> state.tweets.tweet)
         <SideBar />
       </Grid>
       <Grid item xs={6}>
-        <Paper variant="outlined">
-          <Typography variant="h1">Главная</Typography>
-        </Paper>
-        <PostForm />
         <Routes>
           <Route
-            path="/home"
+            path="/"
             element={
-              !isLoading ? (
-                data?.map((twet: Tweet, i: number) => (
-                  <TwitForm key={i} text={twet.text} user={twet.user} />
-                ))
-              ) : (
-                <LinearProgress />
-              )
-            }></Route>
+              <>
+                <Paper variant="outlined">
+                  <Typography variant="h1">Главная</Typography>
+                </Paper>
+                <PostForm />
+                {!isLoading ? (
+                  data?.data.map((tweet: Tweet, i: number) => (
+                    <Link to={`tweet/:${tweet._id}`}>
+                      <TwitForm key={i} text={tweet.text} user={tweet.user} />
+                    </Link>
+                  ))
+                ) : (
+                  <LinearProgress />
+                )}
+              </>
+            }/>
+
+          <Route path="/tweet/:id" element={<TweetView />} />
         </Routes>
       </Grid>
       <Grid item xs={4} style={{ position: 'sticky', top: '0' }}>
@@ -76,6 +90,6 @@ const twee = useSelector((state:RootState)=> state.tweets.tweet)
       </Grid>
     </Grid>
   );
-}
+};
 
-export default Home
+export default Home;

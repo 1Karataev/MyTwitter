@@ -15,22 +15,22 @@ export interface Tweet {
   user: User
 }
 type ArrayTweet = {
-  tweet: [Tweet|null],
+  tweet: Tweet[],
   load:boolean | null
 }
 
 export const fetchTweets = createAsyncThunk<[Tweet]>(
   'users/fetchTweets',
   async  () => {
-    setLoad(false)
-    const  response  = await axios.get('https://62a375d45bd3609cee6a9053.mockapi.io/tweets')
+    setLoad(true)
+    const  response  = await axios.get('/tweets')
     return response.data
     
   }
 )
 
 const initialState: ArrayTweet = {
-  tweet: [null],
+  tweet: [],
   load: null
 }
 
@@ -41,15 +41,15 @@ const tweetSlice = createSlice({
     setLoad(state, action:PayloadAction<boolean>){
       state.load = action.payload
     },
-    setTweets(state, action:PayloadAction<[Tweet | null]>){
+    setTweets(state, action:PayloadAction<[Tweet]>){
       state.tweet = action.payload
       state.load = true
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchTweets.fulfilled, (state, action) => {
-      state.tweet = action.payload
-      state.load = true
+    builder.addCase(fetchTweets.fulfilled, (state, action: any) => {
+      state.tweet = action.payload.data
+      state.load = false
     })
   },
 })

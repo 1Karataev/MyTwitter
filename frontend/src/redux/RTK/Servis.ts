@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { axiosBaseQuery } from '../../core/axiosBaseQuery'
 import { Tweet } from '../slice/Tweets'
 
 
@@ -6,12 +7,36 @@ import { Tweet } from '../slice/Tweets'
 
 export const postApi = createApi({
   reducerPath:'postApi',
-  baseQuery:fetchBaseQuery({baseUrl:'https://62a375d45bd3609cee6a9053.mockapi.io/'}),
+  baseQuery:axiosBaseQuery({baseUrl:'http://localhost:9999/'}),
+  tagTypes:["POST"],
   endpoints:(builder)=>({
-    getPost:builder.query<[Tweet],any>({
-      query:()=> `tweets`
-    })
+    getPosts:builder.query<{sucsess: string, data: [Tweet]}, any>({
+      query:()=> ({
+        url:`tweets`,
+        method: 'GET'
+      }),
+      providesTags: result => ['POST']
+    }), 
+
+     getPost:builder.query<{sucsess: string, data: Tweet}, any>({
+      query:(id: string)=> ({
+        url:`tweets/${id}`,
+        method: 'GET'
+      }),
+      providesTags: result => ['POST']
+    }), 
+
+    addTweet:builder.mutation<Tweet, Tweet>({
+      query:(tweet: Tweet)=>({
+        url:'tweets',
+        method:'POST',
+        data: tweet
+      }),
+      invalidatesTags:['POST']
+    }),
+    
+
   }),
 })
 
-export const {   useLazyGetPostQuery } = postApi
+export const {  useLazyGetPostQuery, useLazyGetPostsQuery, useAddTweetMutation } = postApi

@@ -8,11 +8,19 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ListIcon from '@mui/icons-material/ListAlt';
 import UserIcon from '@mui/icons-material/Person';
 import classes from '../page/sign/main/Home.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const SideBar:React.FC = () => {
+
+  const history = useNavigate();
+
+  const onTwitterClick = () => {
+    history('/');
+  }
+
   return (
     <ul className={classes.homeul}>
-      <li>
+      <li onClick={onTwitterClick}>
         <IconButton color="primary" aria-label="add an alarm">
           <TwitterIcon color="primary" />
         </IconButton>
