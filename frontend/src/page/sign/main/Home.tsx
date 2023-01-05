@@ -72,7 +72,7 @@ const Home: React.FC = () => {
                 <PostForm />
                 {!isLoading ? (
                   data?.data.map((tweet: Tweet, i: number) => (
-                    <Link to={`tweet/:${tweet._id}`}>
+                    <Link to={`tweet/:${tweet._id}`} style={{position: 'relative'}}>
                       <TwitForm key={i} text={tweet.text} user={tweet.user} />
                     </Link>
                   ))
@@ -80,7 +80,8 @@ const Home: React.FC = () => {
                   <LinearProgress />
                 )}
               </>
-            }/>
+            }
+          />
 
           <Route path="/tweet/:id" element={<TweetView />} />
         </Routes>
