@@ -2,10 +2,20 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { axiosBaseQuery } from '../../core/axiosBaseQuery'
 import { Tweet } from '../slice/Tweets'
 
-interface ILogin {
+export interface ILogin {
   userName: string;
   password: string;
 };
+
+interface IUserInfo {
+    _id?: string,
+  email: string,
+  fullname:string
+  username:string,
+  password:string,
+  confirm_hash:string,
+  token: string,
+}
 
 
 export const postApi = createApi({
@@ -38,9 +48,18 @@ export const postApi = createApi({
       invalidatesTags:['POST']
     }),
 
-     login:builder.mutation<ILogin, ILogin>({
+     login:builder.mutation<{status: string, data: IUserInfo} , ILogin>({
       query:(data)=>({
         url:'auth/login',
+        method:'POST',
+        data:data
+      }),
+      invalidatesTags:['POST']
+    }),
+
+    register:builder.mutation<{status: string, data: IUserInfo}, ILogin>({
+      query:(data)=>({
+        url:'auth/register',
         method:'POST',
         data:data
       }),
@@ -51,4 +70,4 @@ export const postApi = createApi({
   }),
 })
 
-export const {  useLazyGetPostQuery, useLazyGetPostsQuery, useAddTweetMutation,  useLoginMutation} = postApi
+export const {  useLazyGetPostQuery, useLazyGetPostsQuery, useAddTweetMutation,  useLoginMutation, useRegisterMutation} = postApi

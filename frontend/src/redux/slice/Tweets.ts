@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
@@ -19,16 +19,6 @@ type ArrayTweet = {
   load:boolean | null
 }
 
-export const fetchTweets = createAsyncThunk<[Tweet]>(
-  'users/fetchTweets',
-  async  () => {
-    setLoad(true)
-    const  response  = await axios.get('/tweets')
-    return response.data
-    
-  }
-)
-
 const initialState: ArrayTweet = {
   tweet: [],
   load: null
@@ -45,12 +35,6 @@ const tweetSlice = createSlice({
       state.tweet = action.payload
       state.load = true
     }
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchTweets.fulfilled, (state, action: any) => {
-      state.tweet = action.payload.data
-      state.load = false
-    })
   },
 })
 

@@ -13,7 +13,7 @@ import React, { useEffect } from 'react';
 import TwitForm from '../../../components/TwitForm';
 import PostForm from '../../../components/PostForm';
 import SideBar from '../../../components/SideBar';
-import { fetchTweets, setLoad, setTweets, Tweet, User } from '../../../redux/slice/Tweets';
+import { setLoad, setTweets, Tweet, User } from '../../../redux/slice/Tweets';
 import { RootState, useAppDispatch } from '../../../redux/store';
 import { useSelector } from 'react-redux';
 import { useLazyGetPostsQuery } from '../../../redux/RTK/Servis';
