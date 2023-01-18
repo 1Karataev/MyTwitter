@@ -4,13 +4,17 @@ import { registerValidations } from './validations/register'
 import { createTweetValidations } from './validations/createTweetValidations'
 import {passport} from './core/passport'
 import session from 'express-session'
-
+import multer from 'multer'
+import cors from 'cors'
 import './core/db'
 import { TweetCrtl } from './controllers/TweetControllers'
+import { UploadFileCrtl } from './controllers/UploadFileControllers'
 
 
 const app = express()
-const cors = require('cors')
+
+const storage = multer.memoryStorage()
+const upload = multer({ dest: 'uploads/' })
 
 app.use(express.json())
 
@@ -39,7 +43,9 @@ app.patch('/tweets/:id', passport.authenticate('jwt'), createTweetValidations, T
 app.delete('/tweets/:id', passport.authenticate('jwt'), TweetCrtl.delete)
 
 app.post('/auth/register',registerValidations, UserCrtl.create)
-app.post('/auth/login',  passport.authenticate('local'),UserCrtl.afterLogin)
+app.post('/auth/login',  passport.authenticate('local'),  UserCrtl.afterLogin)
+
+app.post('/upload', upload.single('avatar'), UploadFileCrtl.index)
 
 app.listen(9999,  ()=>{
  

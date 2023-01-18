@@ -70,8 +70,8 @@ class UserController {
         res.json({
         status:'error',
         message:JSON.stringify(error)
-    })
-      }
+      })
+    }
   }
 
    async getUserInfo(req: express.Request, res: express.Response):Promise<void> {

@@ -14,7 +14,7 @@ type Twit = {
 
 const TwitForm: React.FC<Twit> = ({ text, user }) => {
   return (
-    <Paper variant="outlined" onClick={() => console.log(user.username)}>
+    <Paper variant="outlined">
       <Avatar alt="Remy Sharp" src={user.avatarURL} />
       <Typography>
         <b style={{ fontSize: 'small' }}>{user.fullname}</b> <span>{`@${user.username}`}</span>
@@ -39,11 +39,26 @@ const TwitForm: React.FC<Twit> = ({ text, user }) => {
       <Tooltip
         disableFocusListener
         disableTouchListener
-        onOpen={() => {
+        onOpen={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
           console.log(111);
         }}
-        title={<Button>test2</Button>}>
-        <div style={{position:'absolute', top: '15px',right:'10px',}}>
+        title={
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+            }}>
+            test2
+          </Button>
+        }>
+        <div
+          style={{ position: 'absolute', top: '15px', right: '10px' }}
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}>
           <div className={style.tooltip}>
             <span
               style={{
