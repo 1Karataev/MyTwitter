@@ -4,17 +4,21 @@ import { registerValidations } from './validations/register'
 import { createTweetValidations } from './validations/createTweetValidations'
 import {passport} from './core/passport'
 import session from 'express-session'
-import multer from 'multer'
+import multer, { Options } from 'multer'
 import cors from 'cors'
 import './core/db'
 import { TweetCrtl } from './controllers/TweetControllers'
 import { UploadFileCrtl } from './controllers/UploadFileControllers'
+import * as dotenv from 'dotenv' 
+
+
+dotenv.config()
 
 
 const app = express()
 
 const storage = multer.memoryStorage()
-const upload = multer({ dest: 'uploads/' })
+const upload = multer(storage as Options)
 
 app.use(express.json())
 
@@ -45,7 +49,7 @@ app.delete('/tweets/:id', passport.authenticate('jwt'), TweetCrtl.delete)
 app.post('/auth/register',registerValidations, UserCrtl.create)
 app.post('/auth/login',  passport.authenticate('local'),  UserCrtl.afterLogin)
 
-app.post('/upload', upload.single('avatar'), UploadFileCrtl.index)
+app.post('/upload', upload.single('avatar'), UploadFileCrtl.upload)
 
 app.listen(9999,  ()=>{
  
