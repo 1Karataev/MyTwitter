@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 
-axios.interceptors.request.use(async (config) => {
+axios.interceptors.request.use(async(config) => {
   config.headers = {
     ...config.headers,
-  token: window.localStorage.getItem('token') || ''}
- 
-  return config
-})
+    token: window.localStorage.getItem('token') || ''};
 
-export {axios}
+  return config;
+});
+
+export {axios};
