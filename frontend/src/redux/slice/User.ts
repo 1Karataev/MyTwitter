@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import axios from 'axios'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import axios from 'axios';
 
 
 
@@ -22,23 +22,23 @@ type IUserSlcie = {
 const initialState: IUserSlcie = {
   user: null,
   isAuth: false,
-}
+};
 
 const userSlice = createSlice({
-  name:'user',
+  name: 'user',
   initialState,
-  reducers:{
-    setIsAuth(state, action:PayloadAction<boolean>){
-      state.isAuth = action.payload
+  reducers: {
+    setIsAuth(state, action:PayloadAction<boolean>) {
+      state.isAuth = action.payload;
     },
-    setUser(state, action:PayloadAction<User>){
-      state.user = action.payload
-      state.isAuth = true
-    }
+    setUser(state, action:PayloadAction<User>) {
+      state.user = action.payload;
+      state.isAuth = true;
+    },
   },
-})
+});
 
-export const {setIsAuth, setUser } = userSlice.actions
-export default userSlice.reducer
+export const {setIsAuth, setUser} = userSlice.actions;
+export default userSlice.reducer;
 
 

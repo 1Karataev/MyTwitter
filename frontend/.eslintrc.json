@@ -108,7 +108,7 @@
         "padded-blocks": ["error", "never"],
         "semi-spacing": ["error", {"before": false, "after": true}],
         "space-before-blocks": ["error", "always"],
-        "space-before-function-paren": ["error", "never"],
+        "space-before-function-paren": ["off", "never"],
         "space-in-parens": ["error", "never"],
         "space-infix-ops": "error",
         "space-unary-ops": ["error", {
@@ -119,7 +119,6 @@
         "template-curly-spacing": ["error", "never"],
         "template-tag-spacing": ["error", "never"],
         "wrap-iife": ["error", "inside"],
-        "@typescript-eslint/no-explicit-any": "error"
+        "@typescript-eslint/no-explicit-any": "off"
         }
-
 }
