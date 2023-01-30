@@ -13,7 +13,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "@typescript-eslint"
     ],
     "rules": {
         "indent": ["error", 2],
@@ -119,6 +120,6 @@
         "template-curly-spacing": ["error", "never"],
         "template-tag-spacing": ["error", "never"],
         "wrap-iife": ["error", "inside"],
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "error"
         }
 }

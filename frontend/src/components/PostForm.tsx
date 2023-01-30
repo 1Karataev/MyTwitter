@@ -4,12 +4,14 @@ import SmileIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import PikchlIcon from '@mui/icons-material/CropOriginal';
 import {TextareaAutosize} from '@mui/base';
 import {useAddTweetMutation} from '../redux/RTK/Servis';
+import styles from './PostForm.module.scss';
+import {HighlightOff} from '@mui/icons-material';
 
 const PostForm: React.FC = () => {
   const [tweet, setTweet] = useState<string>('');
   const [images, setImages] = useState<Array<string>>([]);
 
-  const hundlerChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handlerChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTweet(e.target.value);
   };
   const fileInput = useRef(null);
@@ -22,15 +24,18 @@ const PostForm: React.FC = () => {
     }
   };
 
-  const onFileInputChange = (event: any) => {
+  const onFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const img = new Blob([event.target.files[0]]);
       setImages((prev) => [...prev, URL.createObjectURL(img)]);
     }
   };
 
+  const onDeleteImageClick = (url: string) => {
+    setImages((prev) => prev.filter((item) => item !== url));
+  };
 
-  const hundlerTweet = async () => {
+  const handlerTweet = async () => {
     await addTweet({
       _id: '635ec5ae7a070627f5290e4b',
       text: tweet,
@@ -53,12 +58,19 @@ const PostForm: React.FC = () => {
             <TextareaAutosize
               style={{width: '400px', height: '200px'}}
               value={tweet}
-              onChange={hundlerChange}
+              onChange={handlerChange}
             ></TextareaAutosize>
             <div>
-              <div style={{backgroundColor: 'red', display: 'flex'}}>
-                {images.map((url) => (
-                  <div style={{backgroundImage: `url(${url})`, width: '50px', height: '50px'}}/>
+              <div className={styles.imageList}>
+                {images.map((url, id) => (
+                  <div style={{backgroundImage: `url(${url})`}} className={styles.imageList_item} key={id}>
+                    <IconButton
+                      color='primary'
+                      style={{width: '10px', height: '10px', position: 'absolute', right: '0', backgroundColor: 'white'}}
+                      onClick={() => onDeleteImageClick(url)}>
+                      <HighlightOff color='error' />
+                    </IconButton>
+                  </div>
                 ))}
               </div>
               <IconButton color='primary' aria-label='add an alarm' onClick={onFileButtonClick}>
@@ -67,20 +79,18 @@ const PostForm: React.FC = () => {
                   <PikchlIcon color='primary' />
                 </label>
               </IconButton>
-            
+
               <IconButton color='primary' aria-label='add an alarm'>
                 <SmileIcon color='primary' />
               </IconButton>
               <Button
                 variant='contained'
                 style={{borderRadius: '30px', marginLeft: '50px'}}
-                onClick={hundlerTweet}
+                onClick={handlerTweet}
               >
                 Твитнуть
               </Button>
             </div>
-            
-            
           </Grid>
         </Grid>
       </Paper>
