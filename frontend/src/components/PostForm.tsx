@@ -7,9 +7,15 @@ import {useAddTweetMutation} from '../redux/RTK/Servis';
 import styles from './PostForm.module.scss';
 import {HighlightOff} from '@mui/icons-material';
 
+
+ interface IFileObject {
+   url: string,
+   file: Blob
+ }
+
 const PostForm: React.FC = () => {
   const [tweet, setTweet] = useState<string>('');
-  const [images, setImages] = useState<Array<string>>([]);
+  const [images, setImages] = useState<Array<IFileObject>>([]);
 
   const handlerChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTweet(e.target.value);
@@ -26,13 +32,13 @@ const PostForm: React.FC = () => {
 
   const onFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const img = new Blob([event.target.files[0]]);
-      setImages((prev) => [...prev, URL.createObjectURL(img)]);
+      const fileObj = new Blob([event.target.files[0]]);
+      setImages((prev) => [...prev, {url: URL.createObjectURL(fileObj), file: fileObj}]);
     }
   };
 
   const onDeleteImageClick = (url: string) => {
-    setImages((prev) => prev.filter((item) => item !== url));
+    setImages((prev) => prev.filter((item) => item.url !== url));
   };
 
   const handlerTweet = async () => {
@@ -56,33 +62,30 @@ const PostForm: React.FC = () => {
           </Grid>
           <Grid item xs={11}>
             <TextareaAutosize
-              style={{width: '400px', height: '200px'}}
+              style={{width: '100%', height: '200px', marginBottom: '20px', borderRadius: '10px', padding: '10px', resize: 'none'}}
               value={tweet}
               onChange={handlerChange}
-            ></TextareaAutosize>
-            <div>
+            />
+            <div className={styles.actions}>
               <div className={styles.imageList}>
                 {images.map((url, id) => (
-                  <div style={{backgroundImage: `url(${url})`}} className={styles.imageList_item} key={id}>
+                  <div style={{backgroundImage: `url(${url.url})`}} className={styles.imageList_item} key={id}>
                     <IconButton
                       color='primary'
                       style={{width: '10px', height: '10px', position: 'absolute', right: '0', backgroundColor: 'white'}}
-                      onClick={() => onDeleteImageClick(url)}>
+                      onClick={() => onDeleteImageClick(url.url)}>
                       <HighlightOff color='error' />
                     </IconButton>
                   </div>
                 ))}
+                <IconButton color='primary' aria-label='add an alarm' onClick={onFileButtonClick}>
+                  <input ref={fileInput} type='file' hidden onChange={onFileInputChange}/>
+                  <label htmlFor='file'>
+                    <PikchlIcon color='primary'/>
+                  </label>
+                </IconButton>
               </div>
-              <IconButton color='primary' aria-label='add an alarm' onClick={onFileButtonClick}>
-                <input ref={fileInput} type='file' hidden onChange={onFileInputChange}/>
-                <label htmlFor='file'>
-                  <PikchlIcon color='primary' />
-                </label>
-              </IconButton>
 
-              <IconButton color='primary' aria-label='add an alarm'>
-                <SmileIcon color='primary' />
-              </IconButton>
               <Button
                 variant='contained'
                 style={{borderRadius: '30px', marginLeft: '50px'}}

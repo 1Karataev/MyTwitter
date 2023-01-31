@@ -46,7 +46,7 @@ const Home: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    fetchPost('');
+    fetchPost();
     // dispatch(fetchTweets())
 
     dispatch(setLoad(false));

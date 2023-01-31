@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     dispatch(setIsAuth(!!window.localStorage.getItem('token')));
 
-    if (isAuth) {
+    if (true) {
       navigate('/');
     } else {
       navigate('/register');

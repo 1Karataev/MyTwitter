@@ -11,7 +11,7 @@ const TweetView: React.FC = () => {
   const [fetchPost, {data, isLoading, error}] = useLazyGetPostQuery();
 
   useEffect(() => {
-    fetchPost(params);
+    fetchPost(params as string);
   }, []);
 
   return (
