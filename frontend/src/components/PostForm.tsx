@@ -3,7 +3,7 @@ import React, {useRef, useState} from 'react';
 import SmileIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import PikchlIcon from '@mui/icons-material/CropOriginal';
 import {TextareaAutosize} from '@mui/base';
-import {useAddTweetMutation} from '../redux/RTK/Servis';
+import {useAddPhotoMutation, useAddTweetMutation} from '../redux/RTK/Servis';
 import styles from './PostForm.module.scss';
 import {HighlightOff} from '@mui/icons-material';
 
@@ -24,6 +24,8 @@ const PostForm: React.FC = () => {
 
   const [addTweet, {}] = useAddTweetMutation();
 
+  const [addPhoto, {}] = useAddPhotoMutation();
+
   const onFileButtonClick = (): void => {
     if (fileInput.current) {
       (fileInput.current as HTMLInputElement).click();
@@ -42,14 +44,16 @@ const PostForm: React.FC = () => {
   };
 
   const handlerTweet = async () => {
+    const result = [];
+    for (let i = 0; i < images.length; i++) {
+      const file = images[i].file;
+      const {url} = await addPhoto(file).unwrap();
+      result.push(url);
+    }
+
     await addTweet({
-      _id: '635ec5ae7a070627f5290e4b',
       text: tweet,
-      user: {
-        fullname: 'admin',
-        username: 'admin',
-        avatarURL: 'https://source.unsplash.com/random/100x100?2',
-      },
+      images: result,
     }).unwrap();
     setTweet('');
   };

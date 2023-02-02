@@ -39,7 +39,7 @@ export const postApi = createApi({
       providesTags: result => ['POST'],
     }),
 
-    addTweet: builder.mutation<Tweet, Tweet>({
+    addTweet: builder.mutation<Tweet, Omit<Tweet, 'user' | '_id'>>({
       query: (tweet) => ({
         url: 'tweets',
         method: 'POST',
@@ -66,8 +66,18 @@ export const postApi = createApi({
       invalidatesTags: ['POST'],
     }),
 
+    addPhoto: builder.mutation<{ url: string }, Blob>({
+      query: (photo) => ({
+        url: 'upload',
+        method: 'POST',
+        data: photo,
+      }),
+      invalidatesTags: ['POST'],
+    }),
+
 
   }),
 });
 
-export const {useLazyGetPostQuery, useLazyGetPostsQuery, useAddTweetMutation, useLoginMutation, useRegisterMutation} = postApi;
+export const {
+  useLazyGetPostQuery, useLazyGetPostsQuery, useAddTweetMutation, useLoginMutation, useRegisterMutation, useAddPhotoMutation} = postApi;

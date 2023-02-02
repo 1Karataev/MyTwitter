@@ -11,7 +11,8 @@ export interface User {
 
 export interface Tweet {
   _id:string,
-  text:string, 
+  text:string,
+  images?: Array<string>,
   user: User
 }
 type ArrayTweet = {

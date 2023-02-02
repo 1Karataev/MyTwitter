@@ -41,11 +41,11 @@ const Signin: React.FC = () => {
   const [onLogin, setOnLogin] = useState<boolean>(false);
   const [onRegister, setOnRegister] = useState<boolean>(false);
 
-  const hundlerLoginOpen = () => {
+  const handlerLoginOpen = () => {
     setOnLogin(!onLogin);
   };
 
-  const hundlerRegisterOpen = () => {
+  const handlerRegisterOpen = () => {
     setOnRegister(!onRegister);
   };
 
@@ -57,13 +57,13 @@ const Signin: React.FC = () => {
     <div className={classes.wrapper}>
       <div className={classes.blueside}></div>
       <div className={classes.registr}>
-        <TwitterIcon />
+        <TwitterIcon style={{width: '100px', height: '100px', marginBottom: '40px'}}/>
         <Typography variant='h1'>В курсе происходящего</Typography>
-        <Typography variant='h3'>Присоединяйтесь к Твиттеру прямо сейчас!</Typography>
+        <Typography variant='h3' style={{marginBottom: '40px'}}>Присоединяйтесь к Твиттеру прямо сейчас!</Typography>
 
         <Modal
           open={onLogin}
-          onClose={hundlerLoginOpen}
+          onClose={handlerLoginOpen}
           aria-labelledby='modal-modal-title'
           aria-describedby='modal-modal-description'
         >
@@ -88,7 +88,7 @@ const Signin: React.FC = () => {
         </Modal>
         <Modal
           open={onRegister}
-          onClose={hundlerRegisterOpen}
+          onClose={handlerRegisterOpen}
           aria-labelledby='modal-modal-title'
           aria-describedby='modal-modal-description'
         >
@@ -111,12 +111,12 @@ const Signin: React.FC = () => {
             />
           </Box>
         </Modal>
-        <Button variant='contained' onClick={hundlerRegisterOpen}>
+        <Button variant='contained' onClick={handlerRegisterOpen}>
           Зарегистрироваться
         </Button>
         <Button
           variant='outlined'
-          onClick={hundlerLoginOpen}
+          onClick={handlerLoginOpen}
           style={{width: '205px', marginTop: '20px'}}
         >
           войти
