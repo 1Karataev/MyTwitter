@@ -1,18 +1,18 @@
 // @ts-ignore
 import express from 'express';
-import {UserCrtl} from './controllers/UserControllers';
-import {registerValidations} from './validations/register';
-import {createTweetValidations} from './validations/createTweetValidations';
-import {passport} from './core/passport';
+import { UserCrtl } from './controllers/UserControllers';
+import { registerValidations } from './validations/register';
+import { createTweetValidations } from './validations/createTweetValidations';
+import { passport } from './core/passport';
 // @ts-ignore
 import session from 'express-session';
 // @ts-ignore
-import multer, {Options} from 'multer';
+import multer, { Options } from 'multer';
 // @ts-ignore
 import cors from 'cors';
 import './core/db';
-import {TweetCtrl} from './controllers/TweetControllers';
-import {UploadFileCrtl} from './controllers/UploadFileControllers';
+import { TweetCtrl } from './controllers/TweetControllers';
+import { UploadFileCrtl } from './controllers/UploadFileControllers';
 import * as dotenv from 'dotenv';
 
 

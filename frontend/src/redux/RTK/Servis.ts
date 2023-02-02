@@ -1,6 +1,6 @@
-import {createApi} from '@reduxjs/toolkit/query/react';
-import {axiosBaseQuery} from '../../core/axiosBaseQuery';
-import {Tweet} from '../slice/Tweets';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { axiosBaseQuery } from '../../core/axiosBaseQuery';
+import { Tweet } from '../slice/Tweets';
 
 export interface ILogin {
   userName: string;
@@ -8,22 +8,22 @@ export interface ILogin {
 }
 
 interface IUserInfo {
-    _id?: string,
+  _id?: string,
   email: string,
-  fullname:string
-  username:string,
-  password:string,
-  confirm_hash:string,
+  fullname: string
+  username: string,
+  password: string,
+  confirm_hash: string,
   token: string,
 }
 
 
 export const postApi = createApi({
   reducerPath: 'postApi',
-  baseQuery: axiosBaseQuery({baseUrl: 'http://localhost:9999/'}),
+  baseQuery: axiosBaseQuery({ baseUrl: 'http://localhost:9999/' }),
   tagTypes: ['POST'],
   endpoints: (builder) => ({
-    getPosts: builder.query<{sucsess: string, data: [Tweet]}, void>({
+    getPosts: builder.query<{ sucsess: string, data: [Tweet] }, void>({
       query: () => ({
         url: 'tweets',
         method: 'GET',
@@ -31,7 +31,7 @@ export const postApi = createApi({
       providesTags: result => ['POST'],
     }),
 
-    getPost: builder.query<{sucsess: string, data: Tweet}, string>({
+    getPost: builder.query<{ sucsess: string, data: Tweet }, string>({
       query: (id) => ({
         url: `tweets/${id}`,
         method: 'GET',
@@ -48,7 +48,7 @@ export const postApi = createApi({
       invalidatesTags: ['POST'],
     }),
 
-    login: builder.mutation<{status: string, data: IUserInfo}, ILogin>({
+    login: builder.mutation<{ status: string, data: IUserInfo }, ILogin>({
       query: (data) => ({
         url: 'auth/login',
         method: 'POST',
@@ -57,7 +57,7 @@ export const postApi = createApi({
       invalidatesTags: ['POST'],
     }),
 
-    register: builder.mutation<{status: string, data: IUserInfo}, ILogin>({
+    register: builder.mutation<{ status: string, data: IUserInfo }, ILogin>({
       query: (data) => ({
         url: 'auth/register',
         method: 'POST',
@@ -70,7 +70,8 @@ export const postApi = createApi({
       query: (photo) => ({
         url: 'upload',
         method: 'POST',
-        data: photo,
+        data: new FormData().append('image', photo),
+        headers: { 'Content-Type': 'multipart/ form - data' },
       }),
       invalidatesTags: ['POST'],
     }),
@@ -80,4 +81,4 @@ export const postApi = createApi({
 });
 
 export const {
-  useLazyGetPostQuery, useLazyGetPostsQuery, useAddTweetMutation, useLoginMutation, useRegisterMutation, useAddPhotoMutation} = postApi;
+  useLazyGetPostQuery, useLazyGetPostsQuery, useAddTweetMutation, useLoginMutation, useRegisterMutation, useAddPhotoMutation } = postApi;

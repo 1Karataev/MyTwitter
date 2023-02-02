@@ -5,11 +5,11 @@ import cloudinary from '../core/cloudinary';
 
 
 class UploadFileController {
-  async upload(req: express.Request, res: express.Response):Promise<void> {
+  async upload(req: express.Request, res: express.Response): Promise<void> {
     const file = req.file;
-
+    console.log(file)
     try {
-      cloudinary.uploader.upload_stream({resource_type: 'auto'}, (error, result) => {
+      cloudinary.uploader.upload_stream({ resource_type: 'auto' }, (error, result) => {
         if (error || !result) {
           return res.status(500).json({
             status: 'error',

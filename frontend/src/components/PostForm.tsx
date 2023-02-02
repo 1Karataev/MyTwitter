@@ -34,8 +34,9 @@ const PostForm: React.FC = () => {
 
   const onFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const fileObj = new Blob([event.target.files[0]]);
-      setImages((prev) => [...prev, {url: URL.createObjectURL(fileObj), file: fileObj}]);
+      const file = event.target.files[0];
+      const fileObj = new Blob([file]);
+      setImages((prev) => [...prev, {url: URL.createObjectURL(fileObj), file: file}]);
     }
   };
 
