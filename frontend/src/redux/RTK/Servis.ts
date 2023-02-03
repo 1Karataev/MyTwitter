@@ -1,6 +1,7 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import { axiosBaseQuery } from '../../core/axiosBaseQuery';
-import { Tweet } from '../slice/Tweets';
+import {createApi} from '@reduxjs/toolkit/query/react';
+import {axiosBaseQuery} from '../../core/axiosBaseQuery';
+import {Tweet} from '../slice/Tweets';
+import {formDataFromFile} from '../../helpers/helpers';
 
 export interface ILogin {
   userName: string;
@@ -20,7 +21,7 @@ interface IUserInfo {
 
 export const postApi = createApi({
   reducerPath: 'postApi',
-  baseQuery: axiosBaseQuery({ baseUrl: 'http://localhost:9999/' }),
+  baseQuery: axiosBaseQuery({baseUrl: 'http://localhost:9999/'}),
   tagTypes: ['POST'],
   endpoints: (builder) => ({
     getPosts: builder.query<{ sucsess: string, data: [Tweet] }, void>({
@@ -70,8 +71,8 @@ export const postApi = createApi({
       query: (photo) => ({
         url: 'upload',
         method: 'POST',
-        data: new FormData().append('image', photo),
-        headers: { 'Content-Type': 'multipart/ form - data' },
+        data: formDataFromFile(photo),
+        headers: {'Content-Type': 'multipart/form-data'},
       }),
       invalidatesTags: ['POST'],
     }),
@@ -80,5 +81,7 @@ export const postApi = createApi({
   }),
 });
 
+
+
 export const {
-  useLazyGetPostQuery, useLazyGetPostsQuery, useAddTweetMutation, useLoginMutation, useRegisterMutation, useAddPhotoMutation } = postApi;
+  useLazyGetPostQuery, useLazyGetPostsQuery, useAddTweetMutation, useLoginMutation, useRegisterMutation, useAddPhotoMutation} = postApi;
