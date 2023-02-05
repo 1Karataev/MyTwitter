@@ -96,8 +96,8 @@ class TweetController {
       }
 
       const tweet = await tweetModel.findById(tweetId);
-
-      if (tweet && tweet.user === user._id?.toString()) {
+       
+      if (tweet && tweet.user?.toString() === user._id?.toString()) {
         tweet.remove();
         res.send();
       } else {

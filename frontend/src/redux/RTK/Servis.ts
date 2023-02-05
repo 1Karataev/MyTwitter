@@ -77,6 +77,15 @@ export const postApi = createApi({
       invalidatesTags: ['POST'],
     }),
 
+    deleteTweet: builder.mutation<{ sucsess: string, data: Tweet }, string>({
+      query: (id) => ({
+        url: `tweets/${id}`,
+        method: 'DELETE',
+        credentials: 'include',
+      }),
+      invalidatesTags: ['POST'],
+    }),
+
 
   }),
 });
@@ -84,4 +93,5 @@ export const postApi = createApi({
 
 
 export const {
-  useLazyGetPostQuery, useLazyGetPostsQuery, useAddTweetMutation, useLoginMutation, useRegisterMutation, useAddPhotoMutation} = postApi;
+  useLazyGetPostQuery, 
+  useLazyGetPostsQuery, useAddTweetMutation, useLoginMutation, useRegisterMutation, useAddPhotoMutation, useDeleteTweetMutation} = postApi;

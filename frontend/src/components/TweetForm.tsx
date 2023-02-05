@@ -7,17 +7,25 @@ import ReplyIcon from '@mui/icons-material/ReplyOutlined';
 import {User} from '../redux/slice/Tweets';
 import style from './TweetForm.module.scss';
 import mediumZoom, {ZoomSelector} from 'medium-zoom';
+import {useDeleteTweetMutation} from '../redux/RTK/Servis';
 
 type Twit = {
   text: string;
   user: User;
   images?: Array<string>;
+  id: string;
 };
 
-const TweetForm: React.FC<Twit> = ({text, user, images}) => {
+const TweetForm: React.FC<Twit> = ({text, user, images, id}) => {
   useEffect(() => {
     mediumZoom(document.querySelectorAll('#img') as ZoomSelector);
   }, [images]);
+
+  const [deleteTweet, {}] = useDeleteTweetMutation();
+
+  const onDeleteTweetClick = () => {
+    deleteTweet(id);
+  };
 
   return (
     <Paper variant='outlined' className={style.container}>
@@ -89,6 +97,7 @@ const TweetForm: React.FC<Twit> = ({text, user, images}) => {
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
+                onDeleteTweetClick();
               }}
             >
               Удалить

@@ -80,6 +80,7 @@ const Home: React.FC = () => {
                     >
                       <TweetForm
                         key={i}
+                        id={tweet._id}
                         text={tweet.text}
                         user={tweet.user}
                         images={tweet.images}

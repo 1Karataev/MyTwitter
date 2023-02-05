@@ -18,6 +18,7 @@ const TweetView: React.FC = () => {
     <>
       {!isLoading && data ? (
         <TwitForm
+          id={data?.data._id}
           key={data?.data._id}
           text={data?.data.text}
           user={data?.data.user}
