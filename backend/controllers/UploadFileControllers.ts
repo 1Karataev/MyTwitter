@@ -5,9 +5,8 @@ import cloudinary from '../core/cloudinary';
 
 
 class UploadFileController {
-  async upload(req: express.Request, res: express.Response): Promise<void> {
+  async upload(req: any, res: express.Response): Promise<void> {
     const file = req.file;
-    console.log(file)
     try {
       cloudinary.uploader.upload_stream({ resource_type: 'auto' }, (error, result) => {
         if (error || !result) {
@@ -17,7 +16,7 @@ class UploadFileController {
           });
         }
 
-        res.send().status(201);
+        res.status(201).json(result);
       }).end(file?.buffer);
     } catch (error) {
       res.json({

@@ -7,11 +7,10 @@ import {useAddPhotoMutation, useAddTweetMutation} from '../redux/RTK/Servis';
 import styles from './PostForm.module.scss';
 import {HighlightOff} from '@mui/icons-material';
 
-
- interface IFileObject {
-   url: string,
-   file: Blob
- }
+interface IFileObject {
+  url: string;
+  file: Blob;
+}
 
 const PostForm: React.FC = () => {
   const [tweet, setTweet] = useState<string>('');
@@ -57,45 +56,54 @@ const PostForm: React.FC = () => {
       images: result,
     }).unwrap();
     setTweet('');
+    setImages([]);
   };
   return (
     <>
       <Paper variant='outlined'>
         <Grid container direction='row' justifyContent='flex-start' alignItems='center'>
-          <Grid item xs={1}>
+          <Grid item xs={1} className={styles.avatar}>
             <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
           </Grid>
           <Grid item xs={11}>
             <TextareaAutosize
-              style={{width: '100%', height: '200px', marginBottom: '20px', borderRadius: '10px', padding: '10px', resize: 'none'}}
+              placeholder='Что нового?'
               value={tweet}
               onChange={handlerChange}
+              className={styles.textarea}
             />
             <div className={styles.actions}>
               <div className={styles.imageList}>
                 {images.map((url, id) => (
-                  <div style={{backgroundImage: `url(${url.url})`}} className={styles.imageList_item} key={id}>
+                  <div
+                    style={{backgroundImage: `url(${url.url})`}}
+                    className={styles.imageList_item}
+                    key={id}
+                  >
                     <IconButton
                       color='primary'
-                      style={{width: '10px', height: '10px', position: 'absolute', right: '0', backgroundColor: 'white'}}
-                      onClick={() => onDeleteImageClick(url.url)}>
+                      style={{
+                        width: '10px',
+                        height: '10px',
+                        position: 'absolute',
+                        right: '0',
+                        backgroundColor: 'white',
+                      }}
+                      onClick={() => onDeleteImageClick(url.url)}
+                    >
                       <HighlightOff color='error' />
                     </IconButton>
                   </div>
                 ))}
                 <IconButton color='primary' aria-label='add an alarm' onClick={onFileButtonClick}>
-                  <input ref={fileInput} type='file' hidden onChange={onFileInputChange}/>
+                  <input ref={fileInput} type='file' hidden onChange={onFileInputChange} />
                   <label htmlFor='file'>
-                    <PikchlIcon color='primary'/>
+                    <PikchlIcon color='primary' />
                   </label>
                 </IconButton>
               </div>
 
-              <Button
-                variant='contained'
-                style={{borderRadius: '30px', marginLeft: '50px'}}
-                onClick={handlerTweet}
-              >
+              <Button variant='contained' className={styles.button} onClick={handlerTweet}>
                 Твитнуть
               </Button>
             </div>

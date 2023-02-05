@@ -1,15 +1,51 @@
 .tooltip {
   border-radius: '50%';
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 3px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
 .tooltip:hover {
-  background: rgb(110, 105, 105);
+  background: rgb(202, 201, 201);
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  transition-property: background;
+  transition-duration: 0.2s;
+  width: 30px;
+  height: 30px;
  }
+
+ .userInfo {
+  gap: 20px;
+  margin-top: 10px;
+  display: flex;
+ }
+
+ .image {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+ }
+
+ .imageContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 10px 10px 70px ;
+    gap: 20px;
+    position: relative;
+ }
+
+ .buttonsInTooltip {
+  display: flex;
+  flex-direction:column;
+  background-color: white;
+ }
+

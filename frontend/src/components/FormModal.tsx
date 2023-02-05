@@ -1,6 +1,6 @@
 import {Alert, Box, Button, CircularProgress, Modal, Snackbar, TextField} from '@mui/material';
 import React, {ReactNode, useState} from 'react';
-import {useForm, Controller} from 'react-hook-form';
+import {useForm, Controller, SubmitErrorHandler, FieldValues} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {ILogin, useLoginMutation, useRegisterMutation} from '../redux/RTK/Servis';
@@ -8,11 +8,10 @@ import {useAppDispatch} from '../redux/store';
 import {setIsAuth} from '../redux/slice/User';
 import {AlertColor} from '@mui/material/Alert';
 
-
 interface IFormModal {
   inputs: Array<string>;
   button: string;
-  schema: any;
+  schema: yup.AnyObjectSchema;
   schemaName: Array<string>;
   formType: 'register' | 'login';
   closeModal: Function;
@@ -43,8 +42,9 @@ const FormModal: React.FC<IFormModal> = ({
   const [statusSnackbar, setStatusSnackbar] = useState<string>('success');
   const [messageSnackbar, setMessageSnackbar] = useState<string>('');
 
-  const onSubmit = async(data: any) => {
-    if ((formType === 'register')) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSubmit = async (data: any) => {
+    if (formType === 'register') {
       const response = await register(data).unwrap();
 
       if (response.status === 'success') {
@@ -60,7 +60,7 @@ const FormModal: React.FC<IFormModal> = ({
         setMessageSnackbar('Попробуйте другой email');
         setOpenSnackbar(true);
       }
-    } else if ((formType === 'login')) {
+    } else if (formType === 'login') {
       const response = await login(data)
         .unwrap()
         .catch(() => {
@@ -93,20 +93,21 @@ const FormModal: React.FC<IFormModal> = ({
   return (
     <form
       style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
-      onSubmit={handleSubmit(onSubmit)}>
+      onSubmit={handleSubmit(onSubmit)}
+    >
       {inputs.map((value, index, array) => (
         <Controller
           name={schemaName[index]}
           key={index}
           control={control}
           rules={{required: true}}
-          defaultValue=""
+          defaultValue=''
           render={({field}) => (
             <TextField
               {...field}
               style={{width: '90%', margin: '10px 0 0 0'}}
               label={value}
-              variant="standard"
+              variant='standard'
               type={getTypeInput(schemaName[index])}
               helperText={errors[schemaName[index]]?.message as ReactNode}
               error={!!errors[schemaName[index]]}
@@ -119,15 +120,17 @@ const FormModal: React.FC<IFormModal> = ({
         <Alert
           onClose={handleCloseSnackbar}
           severity={statusSnackbar as AlertColor}
-          sx={{width: '100%'}}>
+          sx={{width: '100%'}}
+        >
           {`${messageSnackbar}`}
         </Alert>
       </Snackbar>
 
       <Button
-        type="submit"
-        variant="contained"
-        style={{borderRadius: '30px', margin: '10px 0 20px 0', width: '90%'}}>
+        type='submit'
+        variant='contained'
+        style={{borderRadius: '30px', margin: '10px 0 20px 0', width: '90%'}}
+      >
         {isLoading ? <CircularProgress /> : button}
       </Button>
     </form>

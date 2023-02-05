@@ -17,8 +17,29 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
-textarea {
-  &:focus {
-    outline: 2px solid dodgerblue;
-  }
+
+.avatar.avatar {
+  align-self: start;
+  padding: 20px 0 0 20px;
 }
+
+.textarea {
+  width: 100%;
+  font: inherit;
+  font-weight: 400;
+  height: 150px !important;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 20px;
+  resize: none;
+  border: none;
+  outline: none;
+}
+
+.button.button {
+  height: 40px;
+  border-radius: 30px;
+  margin: 0 10px 10px 0;
+}
+
+

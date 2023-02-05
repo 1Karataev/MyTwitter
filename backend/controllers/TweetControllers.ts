@@ -51,7 +51,7 @@ class TweetController {
     }
   }
 
-  async create(req: express.Request, res: express.Response):Promise<void> {
+  async create(req: any, res: express.Response):Promise<void> {
     try {
       const user = req.user as UserModel;
       const errors = validationResult(req);
@@ -65,6 +65,7 @@ class TweetController {
         const data: TweetModel = {
           text: req.body.text,
           user: user?._id,
+          images: req.body.images,
         };
 
 
@@ -85,7 +86,7 @@ class TweetController {
     }
   }
 
-  async delete(req: express.Request, res: express.Response):Promise<void> {
+  async delete(req: any, res: express.Response):Promise<void> {
     const user = req.user as UserModel;
     try {
       const tweetId = req.params.id;
@@ -111,7 +112,7 @@ class TweetController {
     }
   }
 
-  async update(req: express.Request, res: express.Response):Promise<void> {
+  async update(req: any, res: express.Response):Promise<void> {
     const user = req.user as UserModel;
     const text = req.body.text;
     try {

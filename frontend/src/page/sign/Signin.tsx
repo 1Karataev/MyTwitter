@@ -1,3 +1,4 @@
+/* eslint-disable newline-per-chained-call */
 import {Typography, Button, Box, Modal, TextField, IconButton} from '@mui/material';
 import React, {useState} from 'react';
 import classes from './Signin.module.scss';
@@ -12,8 +13,7 @@ import CloseIcon from '@mui/icons-material/Close';
 const Signin: React.FC = () => {
   const loginFormSchema = yup
     .object({
-      username: yup.string().email('Неверный Email')
-        .required('Введите Ваш Email'),
+      username: yup.string().email('Неверный Email').required('Введите Ваш Email'),
       password: yup
         .string()
         .min(6, 'Минимальная  длина пароля 6 символов')
@@ -23,8 +23,7 @@ const Signin: React.FC = () => {
 
   const registerFormSchema = yup
     .object({
-      email: yup.string().email('Неверный Email')
-        .required('Введите Ваш Email'),
+      email: yup.string().email('Неверный Email').required('Введите Ваш Email'),
       fullname: yup.string().required('Введите свое ФИО'),
       username: yup.string().required('Введите свои имя'),
       password: yup
@@ -55,11 +54,16 @@ const Signin: React.FC = () => {
 
   return (
     <div className={classes.wrapper}>
-      <div className={classes.blueside}></div>
+      <div className={classes.blueside}>
+        <TwitterIcon
+          style={{width: '300px', height: '300px', marginBottom: '40px', color: 'white'}}
+        />
+      </div>
       <div className={classes.registr}>
-        <TwitterIcon style={{width: '100px', height: '100px', marginBottom: '40px'}}/>
         <Typography variant='h1'>В курсе происходящего</Typography>
-        <Typography variant='h3' style={{marginBottom: '40px'}}>Присоединяйтесь к Твиттеру прямо сейчас!</Typography>
+        <Typography variant='h3' style={{marginBottom: '40px'}}>
+          Присоединяйтесь к Твиттеру прямо сейчас!
+        </Typography>
 
         <Modal
           open={onLogin}

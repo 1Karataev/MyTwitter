@@ -7,10 +7,11 @@ import {
   Paper,
   styled,
   TextField,
-  Typography
+  // eslint-disable-next-line comma-dangle
+  Typography,
 } from '@mui/material';
 import React, {useEffect} from 'react';
-import TwitForm from '../../../components/TwitForm';
+import TweetForm from '../../../components/TweetForm';
 import PostForm from '../../../components/PostForm';
 import SideBar from '../../../components/SideBar';
 import {setLoad, setTweets, Tweet, User} from '../../../redux/slice/Tweets';
@@ -56,24 +57,33 @@ const Home: React.FC = () => {
   const twee = useSelector((state: RootState) => state.tweets.tweet);
 
   return (
-    <Grid container direction="row" justifyContent="space-between" alignItems="flex-start">
+    <Grid container direction='row' justifyContent='space-between' alignItems='flex-start'>
       <Grid item xs={2} style={{position: 'sticky', top: '0'}}>
         <SideBar />
       </Grid>
       <Grid item xs={6}>
         <Routes>
           <Route
-            path="/"
+            path='/'
             element={
               <>
-                <Paper variant="outlined">
-                  <Typography variant="h1">Главная</Typography>
+                <Paper variant='outlined'>
+                  <Typography variant='h1'>Главная</Typography>
                 </Paper>
                 <PostForm />
                 {!isLoading ? (
                   data?.data.map((tweet: Tweet, i: number) => (
-                    <Link to={`tweet/:${tweet._id}`} style={{position: 'relative'}}>
-                      <TwitForm key={i} text={tweet.text} user={tweet.user} />
+                    <Link
+                      key={i}
+                      to={`tweet/:${tweet._id}`}
+                      style={{position: 'relative', textDecoration: 'none'}}
+                    >
+                      <TweetForm
+                        key={i}
+                        text={tweet.text}
+                        user={tweet.user}
+                        images={tweet.images}
+                      />
                     </Link>
                   ))
                 ) : (
@@ -83,11 +93,11 @@ const Home: React.FC = () => {
             }
           />
 
-          <Route path="/tweet/:id" element={<TweetView />} />
+          <Route path='/tweet/:id' element={<TweetView />} />
         </Routes>
       </Grid>
       <Grid item xs={4} style={{position: 'sticky', top: '0'}}>
-        <CssTextField id="filled-basic" label="Filled" />
+        <CssTextField id='filled-basic' label='Filled' />
       </Grid>
     </Grid>
   );

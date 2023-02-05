@@ -2,7 +2,7 @@ import {Grid, LinearProgress} from '@mui/material';
 import {dblClick} from '@testing-library/user-event/dist/click';
 import React, {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
-import TwitForm from '../../../components/TwitForm';
+import TwitForm from '../../../components/TweetForm';
 import {useLazyGetPostQuery} from '../../../redux/RTK/Servis';
 
 const TweetView: React.FC = () => {
@@ -21,6 +21,7 @@ const TweetView: React.FC = () => {
           key={data?.data._id}
           text={data?.data.text}
           user={data?.data.user}
+          images={data?.data.images}
         />
       ) : (
         <LinearProgress />
