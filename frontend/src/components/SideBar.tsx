@@ -18,7 +18,7 @@ const SideBar: React.FC = () => {
   };
 
   return (
-    <ul className={classes.homeul}>
+    <ul className={classes.homeUrl}>
       <li onClick={onTwitterClick}>
         <IconButton color="primary" aria-label="add an alarm">
           <TwitterIcon color="primary" />

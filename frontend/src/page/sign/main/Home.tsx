@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   Grid,
   IconButton,
@@ -20,6 +21,8 @@ import {useSelector} from 'react-redux';
 import {useLazyGetPostsQuery} from '../../../redux/RTK/Servis';
 import {Link, Route, Routes} from 'react-router-dom';
 import TweetView from './TweetView';
+import UserInfo from '../../../components/userInfo/UserInfo';
+import styles from './Home.module.scss';
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -58,8 +61,9 @@ const Home: React.FC = () => {
 
   return (
     <Grid container direction='row' justifyContent='space-between' alignItems='flex-start'>
-      <Grid item xs={2} style={{position: 'sticky', top: '0'}}>
+      <Grid item xs={2} className={styles.leftContainer}>
         <SideBar />
+        <UserInfo/>
       </Grid>
       <Grid item xs={6}>
         <Routes>
