@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="83734646-0f6d-473b-9a09-8fc3e44d4b2f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/UserView/UserView.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/UserView/UserView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/TweetModels.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/TweetModels.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/PostForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/PostForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/userInfo/UserInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/userInfo/UserInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/helpers/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/helpers/helpers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/page/sign/main/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/page/sign/main/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/redux/slice/Tweets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/slice/Tweets.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2LRxM96mE70Ba6y2V76lc4TkGSs" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/user/IdeaProjects/MyTwitter/frontend/src/components&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;/home/user/IdeaProjects/MyTwitter/frontend/node_modules/eslint&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/user/IdeaProjects/MyTwitter/frontend/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/components" />
+      <recent name="$PROJECT_DIR$/frontend/src/components/userInfo" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="83734646-0f6d-473b-9a09-8fc3e44d4b2f" name="Changes" comment="" />
+      <created>1675847645369</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675847645369</updated>
+      <workItem from="1675847646524" duration="354000" />
+      <workItem from="1675855183001" duration="649000" />
+      <workItem from="1675855843857" duration="58000" />
+      <workItem from="1675855948171" duration="10185000" />
+      <workItem from="1675924265957" duration="16000" />
+      <workItem from="1675936261674" duration="3938000" />
+      <workItem from="1675946658127" duration="1487000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

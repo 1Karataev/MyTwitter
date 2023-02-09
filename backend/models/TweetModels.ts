@@ -15,13 +15,17 @@ const TweetSchema = new Schema<TweetModel>({
     unique: true,
     required: true,
     type: String,
+    createAt: String,
   },
 
   user: {
     required: true,
     type: Schema.Types.ObjectId, ref: 'User',
   },
-  images: Array<string>,
+
+  images: Array<String>,
+
+  createAt: String,
 
 });
 
