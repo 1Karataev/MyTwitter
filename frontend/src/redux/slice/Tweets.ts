@@ -1,5 +1,4 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import axios from 'axios';
 
 
 
@@ -13,7 +12,8 @@ export interface Tweet {
   _id:string,
   text:string,
   images?: Array<string>,
-  user: User
+  user: User,
+  createAt: string
 }
 type ArrayTweet = {
   tweet: Tweet[],

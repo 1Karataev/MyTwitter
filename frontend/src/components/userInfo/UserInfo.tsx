@@ -37,9 +37,8 @@ const UserInfo: React.FC = () => {
         }}
         }
       >
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem>Мой профиль</MenuItem>
+        <MenuItem>Выйти</MenuItem>
       </Menu>
     </div>
 

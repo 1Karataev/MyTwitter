@@ -54,6 +54,7 @@ const PostForm: React.FC = () => {
     await addTweet({
       text: tweet,
       images: result,
+      createAt: new Date().toString(),
     }).unwrap();
     setTweet('');
     setImages([]);

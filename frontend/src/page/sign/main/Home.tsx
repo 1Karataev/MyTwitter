@@ -23,6 +23,7 @@ import {Link, Route, Routes} from 'react-router-dom';
 import TweetView from './TweetView';
 import UserInfo from '../../../components/userInfo/UserInfo';
 import styles from './Home.module.scss';
+import UserView from '../../../components/UserView/UserView';
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -99,6 +100,7 @@ const Home: React.FC = () => {
           />
 
           <Route path='/tweet/:id' element={<TweetView />} />
+          <Route path='/user/:id' element={<UserView />} />
         </Routes>
       </Grid>
       <Grid item xs={4} style={{position: 'sticky', top: '0'}}>
