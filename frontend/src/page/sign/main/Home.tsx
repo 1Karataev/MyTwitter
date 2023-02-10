@@ -66,7 +66,7 @@ const Home: React.FC = () => {
         <SideBar />
         <UserInfo/>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={6} style={{height: '100%'}}>
         <Routes>
           <Route
             path='/'
