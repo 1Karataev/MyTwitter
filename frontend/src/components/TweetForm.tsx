@@ -8,15 +8,17 @@ import {User} from '../redux/slice/Tweets';
 import style from './TweetForm.module.scss';
 import mediumZoom, {ZoomSelector} from 'medium-zoom';
 import {useDeleteTweetMutation} from '../redux/RTK/Servis';
+import {formDate} from '../helpers/helpers';
 
 type Twit = {
   text: string;
   user: User;
   images?: Array<string>;
   id: string;
+  createAt?: string;
 };
 
-const TweetForm: React.FC<Twit> = ({text, user, images, id}) => {
+const TweetForm: React.FC<Twit> = ({text, user, images, id, createAt}) => {
   useEffect(() => {
     mediumZoom(document.querySelectorAll('#img') as ZoomSelector);
   }, [images]);
@@ -54,6 +56,11 @@ const TweetForm: React.FC<Twit> = ({text, user, images, id}) => {
             }}
           />
         ))}
+      </div>
+      <div>
+        <span style={{fontSize: '12px', opacity: '0.8', marginLeft: '20px'}}>
+          Создано {formDate(new Date(createAt as string))} назад
+        </span>
       </div>
       <div>
         <IconButton color='primary' aria-label='add an alarm'>

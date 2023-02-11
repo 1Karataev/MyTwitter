@@ -1,8 +1,8 @@
 // @ts-ignore
 import express from 'express';
 import {validationResult} from 'express-validator';
-import {TweetModel, tweetModel, TweetModelDocument} from '../models/TweetModels';
-import {userModel, UserModel} from '../models/UserModels';
+import {TweetModel, tweetModel} from '../models/TweetModels';
+import {UserModel} from '../models/UserModels';
 import {isValidObjectId} from '../utils/isvalidObjectId';
 
 
@@ -66,6 +66,7 @@ class TweetController {
           text: req.body.text,
           user: user?._id,
           images: req.body.images,
+          createAt: req.body.createAt,
         };
 
 

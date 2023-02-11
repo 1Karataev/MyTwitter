@@ -86,6 +86,13 @@ export const postApi = createApi({
       invalidatesTags: ['POST'],
     }),
 
+    getUser: builder.query<{ sucsess: string, data: IUserInfo }, void>({
+      query: () => ({
+        url: 'users/me',
+        method: 'GET',
+      }),
+      providesTags: result => ['POST'],
+    }),
 
   }),
 });
@@ -94,4 +101,5 @@ export const postApi = createApi({
 
 export const {
   useLazyGetPostQuery, 
-  useLazyGetPostsQuery, useAddTweetMutation, useLoginMutation, useRegisterMutation, useAddPhotoMutation, useDeleteTweetMutation} = postApi;
+  useLazyGetPostsQuery, useAddTweetMutation, useLoginMutation, useRegisterMutation, useAddPhotoMutation, 
+  useDeleteTweetMutation, useLazyGetUserQuery} = postApi;

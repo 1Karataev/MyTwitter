@@ -1,5 +1,4 @@
-import {Grid, LinearProgress} from '@mui/material';
-import {dblClick} from '@testing-library/user-event/dist/click';
+import {LinearProgress} from '@mui/material';
 import React, {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import TwitForm from '../../../components/TweetForm';
@@ -23,6 +22,7 @@ const TweetView: React.FC = () => {
           text={data?.data.text}
           user={data?.data.user}
           images={data?.data.images}
+          createAt={data?.data.createAt}
         />
       ) : (
         <LinearProgress />

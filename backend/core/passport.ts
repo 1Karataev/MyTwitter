@@ -12,7 +12,7 @@ passport.use(new LocalStrategy(async (username: string, password: string, done: 
     if (!user) {
       return done(null, false);
     }
-    ///добавить мд5 в пароль
+    
     if (user.password === password) {
       return done(null, user);
     }

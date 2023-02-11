@@ -1,12 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import axios from 'axios';
 
 
 
 export interface User {
+  id: string,
   fullname: string,
   username:string,
-  avatarURL:string
+  avatarURL?:string,
+  email: string,
 }
 
 export interface Tweet {

@@ -1,10 +1,7 @@
 import {
-  Avatar,
-  Button,
   Grid,
-  IconButton,
+  InputAdornment,
   LinearProgress,
-  makeStyles,
   Paper,
   styled,
   TextField,
@@ -15,32 +12,35 @@ import React, {useEffect} from 'react';
 import TweetForm from '../../../components/TweetForm';
 import PostForm from '../../../components/PostForm';
 import SideBar from '../../../components/SideBar';
-import {setLoad, setTweets, Tweet, User} from '../../../redux/slice/Tweets';
-import {RootState, useAppDispatch} from '../../../redux/store';
-import {useSelector} from 'react-redux';
+import {setLoad, Tweet} from '../../../redux/slice/Tweets';
+import {useAppDispatch} from '../../../redux/store';
 import {useLazyGetPostsQuery} from '../../../redux/RTK/Servis';
 import {Link, Route, Routes} from 'react-router-dom';
 import TweetView from './TweetView';
 import UserInfo from '../../../components/userInfo/UserInfo';
 import styles from './Home.module.scss';
 import UserView from '../../../components/UserView/UserView';
+import SearchIcon from '@mui/icons-material/Search';
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
-    color: 'green',
+    border: 'none',
   },
   '& .MuiInput-underline:after': {
     borderBottomColor: 'green',
   },
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
-      borderColor: 'grey',
+      border: 'none',
     },
     '&:hover fieldset': {
-      borderColor: 'blue',
+      border: 'none',
     },
     '&.Mui-focused fieldset': {
-      borderColor: 'green',
+      border: 'none',
+    },
+    '.MuiTextField-root': {
+      backgroundColor: '#c0c3c9',
     },
   },
 });
@@ -52,19 +52,15 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     fetchPost();
-    // dispatch(fetchTweets())
 
     dispatch(setLoad(false));
   }, []);
-
-  const load = useSelector((state: RootState) => state.tweets.load);
-  const twee = useSelector((state: RootState) => state.tweets.tweet);
 
   return (
     <Grid container direction='row' justifyContent='space-between' alignItems='flex-start'>
       <Grid item xs={2} className={styles.leftContainer}>
         <SideBar />
-        <UserInfo/>
+        <UserInfo />
       </Grid>
       <Grid item xs={6} style={{height: '100%'}}>
         <Routes>
@@ -89,6 +85,7 @@ const Home: React.FC = () => {
                         text={tweet.text}
                         user={tweet.user}
                         images={tweet.images}
+                        createAt={tweet.createAt}
                       />
                     </Link>
                   ))
@@ -104,7 +101,23 @@ const Home: React.FC = () => {
         </Routes>
       </Grid>
       <Grid item xs={4} style={{position: 'sticky', top: '0'}}>
-        <CssTextField id='filled-basic' label='Filled' />
+        <CssTextField
+          id='filled-basic'
+          style={{
+            backgroundColor: 'rgb(226 229 235)',
+            borderRadius: '20px',
+            margin: '20px',
+            height: '50px',
+          }}
+          placeholder='Поиск по Твиттеру'
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position='start'>
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
       </Grid>
     </Grid>
   );

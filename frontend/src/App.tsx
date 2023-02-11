@@ -19,9 +19,9 @@ function App() {
   useEffect(() => {
     dispatch(setIsAuth(!!window.localStorage.getItem('token')));
 
-    if (!true) {
+    if (!!!window.localStorage.getItem('token')) {
       navigate('/register');
-    } else if (location.pathname === '/') {
+    } else if (location.pathname === '/' || location.pathname === '/register') {
       navigate('/');
     }
     setIsLoading(false);

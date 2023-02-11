@@ -10,6 +10,7 @@ export interface UserModel  {
   password:String,
   confirmed: Boolean,
   confirm_hash:String,
+  tweets: String,
   about:String,
   website:String,
 }
@@ -39,14 +40,20 @@ const UserSchema = new Schema<UserModel>({
 
   password:{
     required:true,
-    type: String
+    type: String,
+    select: false,
   },
   
   confirmed: Boolean,
 
   confirm_hash:{
     required:true,
-    type: String
+    type: String,
+    select: false,
+  },
+
+  tweets: {
+    type: Schema.Types.ObjectId, ref: 'Tweet',
   },
 
   about:String,

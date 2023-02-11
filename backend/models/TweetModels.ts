@@ -6,6 +6,7 @@ export interface TweetModel {
   text: String,
   user: String | undefined,
   images: Array<string>,
+  createAt: String,
 }
 
 export type TweetModelDocument = TweetModel & Document
