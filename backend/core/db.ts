@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 
-mongoose.Promise = Promise
+mongoose.Promise = global.Promise;
 
+const url = 'mongodb+srv://monkey:Qawsed!23@cluster0.nngr2ey.mongodb.net/twetter?retryWrites=true&w=majority'
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017')
+mongoose.set('strictQuery', true).connect(url, { useNewUrlParser: true, useUnifiedTopology: true})
 
 const db = mongoose.connection;
 
