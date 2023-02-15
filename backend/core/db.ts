@@ -1,10 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 mongoose.Promise = global.Promise;
 
-const url = 'mongodb+srv://monkey:Qawsed!23@cluster0.nngr2ey.mongodb.net/twetter?retryWrites=true&w=majority'
+const url = process.env.MONGODB_URI as string
 
-mongoose.set('strictQuery', true).connect(url, { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.set('strictQuery', true).connect(url, { useNewUrlParser: true, useUnifiedTopology: true} as ConnectOptions)
 
 const db = mongoose.connection;
 
